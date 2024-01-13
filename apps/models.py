@@ -56,11 +56,11 @@ class User(models.Model):
     sex_user = models.CharField(max_length=1 , choices = SEX_TYPES)
     phone_user = models.CharField(max_length=50)
     email_user = models.EmailField(max_length=255)
-    # check_in_user = models.DateTimeField(auto_now_add=True)
-    # check_out_user = models.DateTimeField(null=True , blank=True)
-    # date_user = models.DateField(auto_now_add=False)
+    check_in_user = models.TimeField(auto_now_add=False)
+    check_out_user = models.TimeField(null=True , blank=True)
+    date_user = models.DateField(auto_now_add=False)
     class Meta : 
         verbose_name = 'utilisateur'
         
         def __str(self):
-            return f'{self.name_user} {self.lastname_user} {self.phone_user} {self.date_user}'
+            return f'{self.name_user} {self.lastname_user} {self.phone_user} {self.date_user} {self.check_in_user} {self.check_out_user}'
