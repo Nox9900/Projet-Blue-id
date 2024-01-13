@@ -49,6 +49,9 @@
     text-align: center;
     padding-top: 10px;
 }
+a{
+    text-decoration: none;
+}
 .icon3{
     border: 3px solid green;
     object-fit: 100% cover;
@@ -61,11 +64,11 @@
     padding-top: 10px;
 }
 .box1:hover{
-    width: 650px;
+    margin-top: -29px;
 }
 .box2:hover{
-    width: 650px;
+    margin-top: -29px;
 }
 .box3:hover{
-    width: 650px;
+    margin-top: -29px;
 }
