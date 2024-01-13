@@ -1,0 +1,95 @@
+forms 
+# models.py
+
+from django.contrib.auth.models import User
+from django.db import models
+
+class UserPreferences(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    theme = models.CharField(max_length=10, default='light')  # 'light' ou 'dark'
+
+
+views
+# forms.py
+
+from django import forms
+from .models import UserPreferences
+
+class ThemePreferenceForm(forms.ModelForm):
+    class Meta:
+        model = UserPreferences
+        fields = ['theme']
+
+
+# views.py
+
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from .forms import ThemePreferenceForm
+
+@login_required
+def toggle_theme(request):
+    user_preferences, created = UserPreferences.objects.get_or_create(user=request.user)
+    
+    if request.method == 'POST':
+        form = ThemePreferenceForm(request.POST, instance=user_preferences)
+        if form.is_valid():
+            form.save()
+            return redirect('home')  # Redirigez vers la page d'accueil ou toute autre page souhaitée
+    else:
+        form = ThemePreferenceForm(instance=user_preferences)
+
+    return render(request, 'toggle_theme.html', {'form': form})
+
+<!-- toggle_theme.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Toggle Theme</h2>
+  <form method="post" action="{% url 'toggle_theme' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+  </form>
+{% endblock %}
+
+
+<!-- base.html -->
+
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Website</title>
+  <link rel="stylesheet" href="{% static 'css/light.css' %}" id="theme-style">
+</head>
+<body>
+  <div id="theme-toggle" onclick="toggleTheme()">
+    {% if user_preferences.theme == 'light' %}
+      <img src="{% static 'img/sun-icon.png' %}" alt="Light theme">
+    {% else %}
+      <img src="{% static 'img/moon-icon.png' %}" alt="Dark theme">
+    {% endif %}
+  </div>
+
+  {% block content %}
+  {% endblock %}
+
+  <script>
+    function toggleTheme() {
+      var themeStyle = document.getElementById('theme-style');
+      var themeToggle = document.getElementById('theme-toggle');
+
+      if (themeStyle.getAttribute('href') === '{% static "css/light.css" %}') {
+        themeStyle.setAttribute('href', '{% static "css/dark.css" %}');
+        themeToggle.innerHTML = '<img src="{% static "img/sun-icon.png" %}" alt="Light theme">';
+      } else {
+        themeStyle.setAttribute('href', '{% static "css/light.css" %}');
+        themeToggle.innerHTML = '<img src="{% static "img/moon-icon.png" %}" alt="Dark theme">';
+      }
+    }
+  </script>
+</body>
+</html>

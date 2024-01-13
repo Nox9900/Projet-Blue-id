@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' type='text/css' href='{% static 'apps/fichier/css/bootstrap.min.css' %}'>
+    <title> {% block title %}{% endblock title  %} </title>
+    {% block styles %}{% endblock styles %}
+</head>
+<body>
+  
+    <nav class="navbar navbar-light bg-light shadow-md">
+        <div class="container">
+          <a class="navbar-brand d-flex p-1" href="#">
+            <img src="{% static "apps/assets/index.jpg" %}" class="m-2" width="50" height="44" alt="logo">
+            <h3 class="text-primary">BLUE-ID</h3>
+        </a>
+          <ul class="nav justify-content-end">
+            <li class="nav-item">
+              <a class="nav-link active text-black" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-black" href="#">Service</a>
+            </li>
+            
+              <li class='nav-item  dropdown'>
+                <a href='#' class='nav-link dropdown-toggle text-black' data-bs-toggle='dropdown'>Save</a>
+                <ul class='dropdown-menu'>
+                     <li><a href='{% url "apps:personal"%}' class='dropdown-item'>Personal</a></li>
+                     <li><a href='#' class='dropdown-item'>Employed</a></li>
+                     <li><a href='{% url "apps:user"%}' class='dropdown-item'>Users</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a href="{% url "apps:index" %}" type="button" class="btn bg-primary btn-md rounded text-center text-white">Register now  <i class="fa fa-arrow-right text-white m-1" aria-hidden="true"></i></a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+</body>
+</html>

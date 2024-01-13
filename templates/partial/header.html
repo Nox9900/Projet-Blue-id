@@ -1,0 +1,27 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel='stylesheet' type='text/css' href='{% static 'apps/fichier/css/bootstrap.min.css' %}'>
+    <title> {% block title %}{% endblock title  %} </title>
+    {% block styles %}{% endblock styles %}
+</head>
+<body>
+  <nav>
+    <div class="container-fluid py-3>
+        <a href="#" class="navbar-brand">
+            <img src="{% static "apps/assets/index.jpg" %}" class="m-2" width="50" height="44" alt="logo">
+        </a>
+        
+            <a class="navbar-brand text-light h1 display-1" href="#">BLUE-ID</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon "></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center " id="navbarNav">
+    </div>
+  </nav>
+</body>
+</html>

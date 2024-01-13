@@ -1,0 +1,23 @@
+.box1{
+    height: 100vh;
+}
+.box2{
+    height: 100vh;
+    position: relative;
+}
+.active{
+    border-left: 4px solid rgb(61, 167, 12);
+}
+.box2-box1{
+    width: 100%;
+    height: 50vh;
+    background: rgb(61, 167, 12) ;
+}
+.list{
+    width: 100%;
+    margin-top: -180px;
+    position: absolute;
+}
+a{
+    text-decoration: none;
+}

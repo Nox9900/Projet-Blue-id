@@ -1,0 +1,71 @@
+.box1{
+    width: 550px;
+    height: 130px;
+    padding: 5px;
+    text-align: center;
+    border: 1px solid white;
+    transition: 0.2s;
+}
+.box2{
+    width: 550px;
+    height: 130px;
+    padding: 2px;
+    text-align: center;
+    border: 1px solid white;
+    transition: 0.2s;
+}
+.box3{
+    width: 550px;
+    border: 1px solid white;
+    height: 130px;
+    padding: 2px;
+    text-align: center;
+    transition: 0.2s;
+}
+.box{
+    margin-top: 100px;
+    padding: 15px 10px;
+    width: 100%;
+}
+.icon1{
+    border: 3px solid blue;
+    object-fit: 100% cover;
+    background: blue;
+    color: white;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px; 
+    text-align: center;
+    padding-top: 10px;
+}
+.icon2{
+    border: 3px solid red;
+    object-fit: 100% cover;
+    background: red;
+    color: white;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px; 
+    text-align: center;
+    padding-top: 10px;
+}
+.icon3{
+    border: 3px solid green;
+    object-fit: 100% cover;
+    background: green;
+    color: white;
+    border-radius: 100%;
+    width: 60px;
+    height: 60px; 
+    text-align: center;
+    padding-top: 10px;
+}
+.box1:hover{
+    width: 650px;
+}
+.box2:hover{
+    width: 650px;
+}
+.box3:hover{
+    width: 650px;
+}

@@ -1,0 +1,21 @@
+{% extends "layout/base.html" %}
+{% load static %}
+
+{% block title %}Home{% endblock title %}
+{% block styles %}
+    <link rel='stylesheet' type='text/css' href='{% static 'apps/own/styles.css' %}'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+{% endblock styles %}
+{% block content %}
+{% include "partial/header1.html" %}
+<div class="container mx-auto p-5 text-center ">
+    <div class="h3 text-dark mb-2">
+        <p>Pensez a vous enregistrer! </p>
+    </div>
+    {% include "apps/main.html" %}
+
+</div>
+
+
+{% endblock content %}

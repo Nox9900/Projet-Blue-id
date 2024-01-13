@@ -1,0 +1,76 @@
+{% extends "layout/base.html" %}
+
+{% load static %}
+
+{% block title %}Liste du personnel{% endblock title %}
+{% block styles %}
+    <link rel='stylesheet' type='text/css' href='{% static "apps/own/personal.css" %}'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock styles %}
+
+{% block content %}
+
+<div class="container-fluid mx-0 w-100 h-100  d-flex align-items-center ">
+    <div class="box1 bg-light w-25 shadow-md ">
+        <div class="container text-center mt-5">
+            <h3 class="text-primary mb-5">BLUE-ID</h3>
+        </div>
+        <div class="container shadow-lg w-75 mt-5">
+            <div class="d-flex flex-column border-light mb-3">
+                <div class="p-2"><i class="active fa fa-user mx-3 px-1"></i>Personal</div>
+                <div class="p-2"><i class=" fa fa-home mx-3 "></i><a href="{% url 'apps:index'%}" class="text-black">Home</a></div>
+                <div class="p-2"><i class=" fa fa-list mx-3"></i>List total</div>
+                <div class="p-2"><i class=" fa fa-user-plus mx-3"></i>Save personal</div>
+            </div>
+        </div>
+    </div>
+    <div class="box2 bg-light w-75  ">
+        <div class="box2-box1 ">
+            <div class="container d-flex justify-content-between ">
+                <h4 class="text-light mt-2">List of personal</h4>
+                <input type="text" placeholder="Effectuer une recherche rapide" class="form-control form-control-md w-50 rounded-2 mt-2 mx-2">
+            </div>
+        </div>
+        <div class="list border-2 rounded-2 text-center mx-auto ">
+            <div class="container-fluid w-100 h-100">
+                <p>Total save: {{message}} </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Lastname</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Sex</th>
+                            <th scope="col">Phone</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </thead>
+                   
+                    <tbody>
+                        {% for personal in personals %}
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>{{personal.name_personal}}</td>
+                            <td>{{personal.lastname_personal}}</td>
+                            <td>{{personal.email_personal}}</td>
+                            <td>{{personal.sex_personal}}</td>
+                            <td>{{personal.phone_personal}}</td>
+                            <!-- <td>{{personal.date_personal}}</td> -->
+                           
+                            <td><i class="fa fa-edit mx-2"></i><i class="fa fa-eye mx-2"></i><i class="fa fa-trash mx-2 text-danger"></i></td>
+                            
+                        </tr>
+                        {% endfor %}
+                       
+                    </tbody>
+                </table>
+            
+                </div>
+            </div>
+            
+    </div>
+    </div>
+</div>
+{% endblock content %}
