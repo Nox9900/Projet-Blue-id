@@ -19,6 +19,6 @@ class EmployedAdmin(admin.ModelAdmin):
         
 @admin.register(User)
 class UserAdmin(admin.ModelAdmin):
-    list_display =('name_user', 'lastname_user', 'sex_user', 'phone_user')
+    list_display =('name_user', 'lastname_user', 'sex_user', 'phone_user', 'date_user','check_in_user','check_out_user')
     class Meta:
         fields = '__all__'
