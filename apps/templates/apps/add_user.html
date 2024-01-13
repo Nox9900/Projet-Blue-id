@@ -1,1 +1,51 @@
+{% extends "layout/base.html" %}
+{% load static %}
+
+{% block title %}Liste du personnel{% endblock title %}
+{% block styles %}
+    <link rel='stylesheet' type='text/css' href='{% static "apps/own/add_user.css" %}'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+{% endblock styles %}
+{% block content %}
+{% include "partial/header_for_add_user.html" %}
+    <div class="container text-center mt-1 bg-light-subtle box">
+        <p class="btn btn-lg rounded-4 bg-success w-100 text-white shadow m-1 ">Register User</p>
+        <form class="row g-3" method='post'>
+            {% csrf_token %}
+            <div class="col-md-6">
+              <label for="validationServer01" class="form-label">Name</label>
+              {{ forms.name_user}}
+            </div>
+           
+            <div class="col-md-6">
+              <label for="validationServer02" class="form-label">Lastname</label>
+              {{forms.lastname_user}}
+            </div>
+            <div class="col-md-6">
+              <label for="validationServer02" class="form-label">Number phone</label>
+              {{forms.phone_user}}
+            </div>
+            <div class="col-md-6">
+              <label for="validationServer02" class="form-label">Date enter</label>
+              {{forms.date_user}}
+            </div>
+            <div class="col-md-6">
+              <label for="validationServer02" class="form-label">Check in</label>
+              {{forms.check_in_user}}
+            </div>
+            <div class="col-md-6">
+              <label for="validationServer02" class="form-label">Check out</label>
+              {{forms.check_out_user}}
+            </div>
+            <div class="col-md-6 text-center">
+                <label for="validationServer01" class="form-label">Sex</label>
+                {{ forms.sex_user}}
+              </div>
+            <div class="col-12">
+              
+              <input type='submit' class='btn btn-outline-primary' value='Add'>
+            </div>
+          </form>
+    </div>
+{% endblock content %}
 
