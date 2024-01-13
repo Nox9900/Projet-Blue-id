@@ -32,19 +32,28 @@
             </div>
         </div>
         <div class="list border-2 rounded-2 text-center mx-auto ">
-            <div class="container-fluid w-100 h-100">
-                <p>Total save: {{message}} </p>
-                <table class="table">
+            <div class="container-fluid w-100 h-100 rounded-2">
+                <p class='text-white'>Total save: {{message}} </p>
+                <table class="table rounded-3">
+                    {% if list_number_users == 0 %}
+                        <div class="container bg-light absolute text-center  shadow-lg nothing ">
+                            <p class="py-5  h6 text-black message">Oups! list empty for now...</p>
+                            <p class="emoji">😞</p>
+                            
+                        </div>
+                        
+                    {% else %}
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
+                            
                             <th scope="col">Name</th>
                             <th scope="col">Lastname</th>
-                            <th scope="col">Email</th>
+                            {% comment %} <th scope="col">Email</th> {% endcomment %}
                             <th scope="col">Sex</th>
                             <th scope="col">Phone</th>
-                            {% comment %} <th scope="col">Check in</th> {% endcomment %}
                             <th scope="col">Date</th>
+                            <th scope="col">Check in</th>
+                            <th scope="col">Check out</th>
                             <th scope="col">Options</th>
                         </tr>
                     </thead>
@@ -52,18 +61,22 @@
                     <tbody>
                         {% for user in users %}
                         <tr>
-                            <th scope="row">1</th>
+                            
                             <td>{{user.name_user}}</td>
                             <td>{{user.lastname_user}}</td>
-                            <td>{{user.email_user}}</td>
+                            {% comment %} <td>{{user.email_user}}</td> {% endcomment %}
                             <td>{{user.sex_user}}</td>
                             <td>{{user.phone_user}}</td>
                             <td>{{user.date_user}}</td>
-                            {% comment %} <td>{{personal.}}</td>  {% endcomment %}
+                            <td>{{user.check_in_user}}</td>  
+                            <td>{{user.check_out}}</td>  
                             <td><i class="fa fa-edit mx-2"></i><i class="fa fa-eye mx-2"></i><i class="fa fa-trash mx-2 text-danger"></i></td>
                             
                         </tr>
                         {% endfor %}
+                    
+                    {% endif %}
+                   
                        
                     </tbody>
                 </table>
