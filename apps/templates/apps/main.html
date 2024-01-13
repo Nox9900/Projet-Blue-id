@@ -9,14 +9,14 @@
 {% block content %}
 <div class="container-fluid w-100">
   <div class="d-flex justify-content-between box mx-auto">
-    <div class="box1 btn btn-lg flex-column  justify-content-center bg-light py-4 text-lg-center shadow-lg   rounded-1 text-black mx-2">
+    <div class="box1 btn btn-lg flex-column  justify-content-center bg-light py-4 text-lg-center shadow-sm   rounded-1 text-black mx-2">
         <p><i class="icon1 fa fa-building mx-3 "></i>Directions</p>
     </div>
-    <div class=" btn btn-lg  box2 bg-light py-4 text-lg-center shadow-lg   rounded-1 text-black mx-2">
-        <p class=""><i class="icon2 fa fa-user mx-3"></i>Employé(s)</p>
+    <div class=" btn btn-lg  box2 bg-light py-4 text-lg-center shadow-sm   rounded-1 text-black mx-2">
+        <p class=""><i class="icon2 fa fa-user mx-3"></i>Employed</p>
     </div>
-    <div class=" btn btn-lg  box3 bg-light py-4 text-lg-center shadow-lg   rounded-1 text-black mx-2">
-        <p class=""><i class="icon3 fa fa-users mx-3"></i>Utilisateur(s)</p
+    <div class=" btn btn-lg  box3 bg-light py-4 text-lg-center shadow-sm   rounded-1 text-black mx-2">
+        <p class=""><i class="icon3 fa fa-users mx-3"></i><a href="{% url "apps:add_user" %}" class="text-black">User(s)</a></p
     </div>
 
   </div>
