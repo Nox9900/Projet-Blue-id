@@ -22,7 +22,7 @@ class PersonalOffice(AbstractEntity):
         super().__init__(*args, **kwargs)
 
     class Meta : 
-        verbose_name = 'personnel du bureau'
+        verbose_name = 'Administration'
         
         def __str__(self):
             return f'{self.firstname} {self.lastname} {self.phone} {self.date}'
@@ -39,7 +39,7 @@ class Employed (AbstractEntity):
     service_employed = models.CharField(max_length=10 , choices = SERVICE_TYPES)
  
     class Meta:
-        verbose_name = 'Employé'
+        verbose_name = 'Employé sites'
         verbose_name_plural ='employés'
         
         def __str__(self):
@@ -48,7 +48,7 @@ class Employed (AbstractEntity):
 class User(AbstractEntity):
     
     class Meta : 
-        verbose_name = 'utilisateur'
+        verbose_name = 'Visiteurs'
         
         def __str(self):
             return f'{self.firstname} {self.lastname} {self.phone} {self.date}'
