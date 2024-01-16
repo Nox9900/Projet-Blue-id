@@ -1,5 +1,5 @@
 from django import forms
-from .models import PersonalOffice
+from .models import PersonalOffice , User
 
 class PersonalForm(forms.ModelForm):
 
@@ -35,3 +35,18 @@ class PersonalForm(forms.ModelForm):
                 } )
         }
     
+class UserForm(forms.Form):
+    name =forms.CharField(max_length=255, required=True  , widget=forms.TextInput(attrs={'class': 'form-control'}))
+    lastname = forms.CharField(max_length=255, required=True , widget=forms.TextInput(attrs={'class': 'form-control'}))
+    phone = forms.CharField(max_length=255, required=True , widget=forms.TextInput(attrs={'class': 'form-control'}))
+    GENRES_SEX = [('F','Femine'), ('M', 'Male'), ('Another', 'Another')]
+    sex  = forms.ChoiceField(choices=GENRES_SEX , required=True,widget=forms.Select(attrs={'class': 'form-select'}))
+    # date = forms.DateTimeField( required=True ,widget=forms.SelectDateWidget(attrs={'class':'form-control'},empty_label=('Choice your date')),
+    #                                                                                  input_formats = ['%Y-%m-%d'])
+    # check_in =forms.DateTimeField(
+    #     widget=forms.DateTimeInput(attrs={'type': 'time',
+    #                                       'class' : 'form-control'})
+    # )
+    class Meta:
+        model = User
+        fields = ['name' , 'lastname' , 'phone', 'sexe' , 'date' , 'time']
