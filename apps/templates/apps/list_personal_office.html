@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <div class="box2 bg-light w-75  ">
+    <div class="box2 bg-light w-75 ">
         <div class="box2-box1 ">
             <div class="container d-flex justify-content-between ">
                 <h4 class="text-light mt-2">List of personal</h4>
@@ -33,12 +33,16 @@
         </div>
         <div class="list border-2 rounded-2 text-center mx-auto ">
             <div class="container-fluid w-100 h-100">
-                <p>Total save: {{message}} </p>
+                <div class="d-flex align-items-center justify-content-between mb-2 ">
+                    <button class="btn btn-success" data-bs-target="#addModalToggle" data-bs-toggle="modal"><span class="fa fa-plus"></span> Ajouter Personnel</button>
+                    <p>Total save: {{ personals | length }}</p>
+                </div>
+            
                 <table class="table">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Name</th>
+                            <th scope="col">Firstname</th>
                             <th scope="col">Lastname</th>
                             <th scope="col">Email</th>
                             <th scope="col">Sex</th>
@@ -50,27 +54,77 @@
                    
                     <tbody>
                         {% for personal in personals %}
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>{{personal.name_personal}}</td>
-                            <td>{{personal.lastname_personal}}</td>
-                            <td>{{personal.email_personal}}</td>
-                            <td>{{personal.sex_personal}}</td>
-                            <td>{{personal.phone_personal}}</td>
-                            <!-- <td>{{personal.date_personal}}</td> -->
-                           
-                            <td><i class="fa fa-edit mx-2"></i><i class="fa fa-eye mx-2"></i><i class="fa fa-trash mx-2 text-danger"></i></td>
-                            
-                        </tr>
+                        <a href="{% url "apps:personal_show" personal.id %}"></a>
+                            <tr>
+
+                                    <td scope="row">{{ personal.id }}</td>
+                                    <td>{{ personal.fristname }}</td>
+                                    <td>{{ personal.lastname }}</td>
+                                    <td>{{ personal.email }}</td>
+                                    <td>{{ personal.sex }}</td>
+                                    <td>{{ personal.phone }}</td>
+                                    <td>{{ personal.date }}</td>
+                                
+                                    <td class="d-flex align-center justify-content-between">
+                                        <i class="fa fa-pencil" data-bs-target="#editModalToggle" data-bs-toggle="modal"></i>
+                                        <i class="fa fa-eyes" data-bs-target="#showModalToggle" data-bs-toggle="modal"></i>
+                                        <a href="{% url "apps:personal_remove" personal.id %}"><i class="fa fa-trash text-danger"></i></a>
+                                    </td>
+
+                            </tr>
+                            </a>
                         {% endfor %}
                        
                     </tbody>
                 </table>
             
+                
+<div class="modal fade" id="addModalToggle" aria-hidden="true" aria-labelledby="addModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addModalToggleLabel">Ajouter un personnel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        <form method="POST">
+        {% csrf_token %}
+        {{ add_form.as_p }}
+        
+        <button class="btn btn-primary col-5" type="submit">Enregistrer</button>
+        </form>  
+    </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="modal fade" id="addModalToggle" aria-hidden="true" aria-labelledby="editModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="editModalToggleLabel">Modifier information d'un personnel</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        <form method="POST">
+        {% csrf_token %}
+        {{ edit_form }}
+        
+        <button class="btn btn-primary col-5" type="submit">Enregistrer</button>
+        </form>  
+    </div>
+    </div>
+  </div>
+</div>
+
+
                 </div>
             </div>
             
     </div>
     </div>
+
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock content %}
