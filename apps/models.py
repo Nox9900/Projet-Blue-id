@@ -10,8 +10,8 @@ class AbstractEntity(models.Model):
     )
     sex = models.CharField(max_length=1 , choices = SEX_TYPES)
     phone = models.CharField(max_length=50)
-    email = models.EmailField(max_length=255)
-    date = models.DateField(auto_now_add=False)
+    email = models.EmailField(max_length=255, unique = True)
+    date = models.DateField(auto_now_add=True)
     #check_in = models.DateTimeField(auto_now_add=True)
     # check_out_personal = models.DateTimeField(null=True , blank=True)
 
@@ -22,7 +22,7 @@ class PersonalOffice(AbstractEntity):
         super().__init__(*args, **kwargs)
 
     class Meta : 
-        verbose_name = 'Administration'
+        verbose_name = 'personnel du bureau'
         
         def __str__(self):
             return f'{self.firstname} {self.lastname} {self.phone} {self.date}'
@@ -39,7 +39,7 @@ class Employed (AbstractEntity):
     service_employed = models.CharField(max_length=10 , choices = SERVICE_TYPES)
  
     class Meta:
-        verbose_name = 'Employé sites'
+        verbose_name = 'Employé'
         verbose_name_plural ='employés'
         
         def __str__(self):
@@ -48,7 +48,7 @@ class Employed (AbstractEntity):
 class User(AbstractEntity):
     
     class Meta : 
-        verbose_name = 'Visiteurs'
+        verbose_name = 'utilisateur'
         
         def __str(self):
             return f'{self.firstname} {self.lastname} {self.phone} {self.date}'
