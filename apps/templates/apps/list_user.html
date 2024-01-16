@@ -1,15 +1,11 @@
 {% extends "layout/base.html" %}
-
 {% load static %}
-
 {% block title %}Liste du personnel{% endblock title %}
 {% block styles %}
     <link rel='stylesheet' type='text/css' href='{% static "apps/own/user.css" %}'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 {% endblock styles %}
-
 {% block content %}
-
 <div class="container-fluid mx-0 w-100 h-100  d-flex align-items-center ">
     <div class="box1 bg-light w-25 shadow-md ">
         <div class="container text-center mt-5">
@@ -33,22 +29,22 @@
         </div>
         <div class="list border-2 rounded-2 text-center mx-auto ">
             <div class="container-fluid w-100 h-100 rounded-2">
-                <p class='text-white'>Total save: {{message}} </p>
-                <table class="table rounded-3">
+                <div class="containner d-flex justify-content-between">
+                    <button class="btn btn-success" data-bs-target="#addModalToggle" data-bs-toggle="modal"><span class="fa fa-plus"></span> Ajouter Personnel</button>
+                    <p class='text-white'>Total save: {{message}} </p>
+                </div>
+                
+                <table class="table rounded-3 mt-1">
                     {% if list_number_users == 0 %}
-                        <div class="container bg-light absolute text-center  shadow-lg nothing ">
+                        <div class="container bg-light absolute text-center  shadow-lg nothing mt-2 ">
                             <p class="py-5  h6 text-black message">Oups! list empty for now...</p>
                             <p class="emoji">😞</p>
-                            
                         </div>
-                        
                     {% else %}
                     <thead>
-                        <tr>
-                            
+                        <tr>   
                             <th scope="col">Name</th>
                             <th scope="col">Lastname</th>
-                            {% comment %} <th scope="col">Email</th> {% endcomment %}
                             <th scope="col">Sex</th>
                             <th scope="col">Phone</th>
                             <th scope="col">Date</th>
@@ -57,34 +53,67 @@
                             <th scope="col">Options</th>
                         </tr>
                     </thead>
-                   
                     <tbody>
                         {% for user in users %}
-                        <tr>
-                            
-                            <td>{{user.name_user}}</td>
-                            <td>{{user.lastname_user}}</td>
-                            {% comment %} <td>{{user.email_user}}</td> {% endcomment %}
-                            <td>{{user.sex_user}}</td>
-                            <td>{{user.phone_user}}</td>
-                            <td>{{user.date_user}}</td>
-                            <td>{{user.check_in_user}}</td>  
-                            <td>{{user.check_out}}</td>  
-                            <td><i class="fa fa-edit mx-2"></i><i class="fa fa-eye mx-2"></i><i class="fa fa-trash mx-2 text-danger"></i></td>
-                            
+                        <tr> 
+                            <a href="#">
+                                <td>{{user.name}}</td>
+                                <td>{{user.lastname}}</td>
+                                {% comment %} <td>{{user.email_user}}</td> {% endcomment %}
+                                <td>{{user.sex}}</td>
+                                <td>{{user.phone}}</td>
+                                <td>{{user.date}}</td>
+                                <td>{{user.time}}</td>  
+                                <td>{{user.check_out_user}}</td>  
+                            </a>
+                            <td><i class="fa fa-edit mx-2"></i><i class="fa fa-eye mx-2"></i><i class="fa fa-trash mx-2 text-danger"></i></td>   
                         </tr>
                         {% endfor %}
-                    
-                    {% endif %}
-                   
-                       
+                    {% endif %}                       
                     </tbody>
                 </table>
-            
+                <div class="modal fade" id="addModalToggle" aria-hidden="true" aria-labelledby="addModalToggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="addModalToggle">Add new user</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-start">
+                          <form method="POST">
+                          {% csrf_token %}
+                          {{ form.as_p }}
+                          <button class="btn btn-primary col-5" type="submit">Enregistrer</button>
+                          </form>  
+                      </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  
+                  <div class="modal fade" id="addModalToggle" aria-hidden="true" aria-labelledby="editModalToggleLabel" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h1 class="modal-title fs-5" id="editModalToggleLabel">Modifier information d'un user</h1>
+                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-start">
+                          <form method="POST">
+                          {% csrf_token %}
+                          {{ form }}
+                          
+                          <button class="btn btn-primary col-5" type="submit">Save</button>
+                          </form>  
+                      </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
             </div>
-            
+
     </div>
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 {% endblock content %}
