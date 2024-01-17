@@ -30,7 +30,7 @@
         <div class="list border-2 rounded-2 text-center mx-auto ">
             <div class="container-fluid w-100 h-100 rounded-2">
                 <div class="containner d-flex justify-content-between">
-                    <button class="btn btn-success" data-bs-target="#addModalToggle" data-bs-toggle="modal"><span class="fa fa-plus"></span> Ajouter Personnel</button>
+                    <button class="btn btn-light btn-outline-success" data-bs-target="#addModalToggle" data-bs-toggle="modal"><span class="fa fa-plus"></span> Add new user</button>
                     <p class='text-white'>Total save: {{message}} </p>
                 </div>
                 
@@ -64,9 +64,9 @@
                                 <td>{{user.phone}}</td>
                                 <td>{{user.date}}</td>
                                 <td>{{user.time}}</td>  
-                                <td>{{user.check_out_user}}</td>  
+                                <td><button class="btn btn-sm bg-success text-light displayExit">Exit</button><p id='markExit'></p></td>  
                             </a>
-                            <td><i class="fa fa-edit mx-2"></i><i class="fa fa-eye mx-2"></i><i class="fa fa-trash mx-2 text-danger"></i></td>   
+                            <td><i class="fa fa-edit mx-2"></i><a href="{% url 'apps:show_user' user.id %}" class="text-black"><i class="fa fa-eye mx-2"></i></a><a href="{% url "apps:delete_user" user.id %}"><i class="fa fa-trash mx-2 text-danger"></i></a></td>   
                         </tr>
                         {% endfor %}
                     {% endif %}                       
@@ -90,30 +90,52 @@
                     </div>
                   </div>
                   
-                  
-                  <div class="modal fade" id="addModalToggle" aria-hidden="true" aria-labelledby="editModalToggleLabel" tabindex="-1">
+                
+                  <!-- <div class="modal fade" id="seeModalToggle" aria-hidden="true" aria-labelledby="editModalToggleLabel" tabindex="-1">
                     <div class="modal-dialog modal-dialog-centered">
                       <div class="modal-content">
                         <div class="modal-header">
-                          <h1 class="modal-title fs-5" id="editModalToggleLabel">Modifier information d'un user</h1>
+                          <h1 class="modal-title fs-5" id="editModalToggleLabel">Informations user</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-start">
-                          <form method="POST">
-                          {% csrf_token %}
-                          {{ form }}
-                          
-                          <button class="btn btn-primary col-5" type="submit">Save</button>
-                          </form>  
+                            <h4 class="text-center">Status Visitor </h4>
+                            <div class="container p-3 mt-2">
+                                <H4> Name : {{user.lastname}} {{user.name}} </H4>
+                                <h6> Date enter : {{user.date}} </h6>
+                                <h6> Email : defalut@gmail.com </h6>
+                                <h6> Hour_enter : {{user.time}} </h6>
+                            </div>
                       </div>
                       </div>
                     </div>
-                  </div>
+                  </div>  -->
                 </div>
             </div>
 
     </div>
     </div>
 </div>
+
+<script src="{% static 'apps/fichier/js/bootstrap.bundle.min.js' %}"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const message = document.getElementById('markExit')
+    const inputDate = document.querySelector('.displayExit')
+let date = new Date()
+function Display_time_exit(chaine){
+         let newTime = new Date(chaine).toLocaleTimeString('fr-FR', {
+             hour:'numeric',
+             minute:'numeric',     
+         })
+         return newTime
+     }
+     inputDate.addEventListener('click', (e)=>{
+            console.log('ok')
+         message.textContent += `${Display_time_exit(date)}`
+          inputDate.style.display = 'none'
+     })
+    console.log()
+
+</script>
 {% endblock content %}
