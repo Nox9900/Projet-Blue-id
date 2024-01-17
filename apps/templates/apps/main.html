@@ -16,14 +16,31 @@
         <p class=""><i class="icon2 fa fa-user mx-3"></i>Employed</p>
     </div>
     <div class=" btn btn-lg  box3 bg-light py-4 text-lg-center shadow-sm   rounded-1 text-black mx-2">
-        <p class=""><i class="icon3 fa fa-users mx-3"></i><a href="{% url "apps:add_user" %}" class="text-black">User(s)</a></p
+        <p class=""><i class="icon3 fa fa-users mx-3"></i><a href="#" class="text-black "data-bs-target="#addModalToggle" data-bs-toggle="modal">User(s)</a></p
     </div>
-
+  </div>
+</div>
+<div class="modal fade" id="addModalToggle" aria-hidden="true" aria-labelledby="addModalToggleLabel" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="addModalToggle">Add new user</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body text-start">
+        <form method="POST">
+          {% csrf_token %}
+          {{ form.as_p }}
+          <button class="btn btn-primary col-5" type="submit">Enregistrer</button>
+        </form>  
+    </div>
+    </div>
   </div>
 </div>
 
 {% block javascript %}
 <script src="{% static 'apps/fichier/js/bootstrap.bundle.min.js' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js" integrity="sha512-X/YkDZyjTf4wyc2Vy16YGCPHwAY8rZJY+POgokZjQB2mhIRFJCckEGc6YyX9eNsPfn0PzThEuNs+uaomE5CO6A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 {% endblock javascript %}
 
