@@ -3,8 +3,33 @@ from .models import  PersonalOffice, User
 from .forms import PersonalForm
 
 def index(request):
-    
-    return render(request , 'apps/index.html')
+    if request.method == "POST":
+        add_form = UserForm(request.POST or None)
+        if add_form.is_valid():
+            fn = add_form.cleaned_data['name']
+            ln = add_form.cleaned_data['lastname']
+            sex = add_form.cleaned_data['sex']
+            phone = add_form.cleaned_data['phone']
+            User.objects.create(
+                name = fn,
+                lastname = ln,
+                sex = sex,
+                phone = phone,
+            )
+
+    list_user = User.objects.order_by('-id').all()
+    list_number_users = list_user.count()
+    message = f'{list_number_users} utilisateurs'
+    if list_number_users == 1:
+        message = f'{list_number_users} utilisateur'    
+    context = {
+        'user': User.objects.all(),
+        'form': UserForm(),
+        'users': list_user,
+        'message': message,
+        'list_number_users':list_number_users
+    }
+    return render(request, 'apps/index.html', context)
 
 
 def list_personal_office(request):
@@ -66,22 +91,6 @@ def remove_personal(request, pk):
 
     return redirect("apps:personal")
 
-def list_users(request):
-    list_user = User.objects.all()
-    
-    list_number_users = list_user.count()
-    message = f'{list_number_users} utilisateurs'
-    
-    if list_number_users == 1:
-        message = f'{list_number_users} utilisateur'
-        
-    context = {
-        'users': list_user,
-        'message': message,
-        'list_number_users':list_number_users
-    }
-    return render(request , 'apps/list_user.html', context)
-
 
 def add_user(request):
     if request.method == 'POST':
@@ -101,3 +110,43 @@ def add_user(request):
 
 def main(request):
     return render(request , 'apps/main.html')
+     #pour la partie user list , remove , show
+def list_users(request):
+    if request.method == "POST":
+        add_form = UserForm(request.POST or None)
+        if add_form:
+            if add_form.is_valid():
+                fn = add_form.cleaned_data['name']
+                ln = add_form.cleaned_data['lastname']
+                sex = add_form.cleaned_data['sex']
+                phone = add_form.cleaned_data['phone']
+                User.objects.create(
+                    name = fn,
+                    lastname = ln,
+                    sex = sex,
+                    phone = phone,
+                )
+
+    list_user = User.objects.order_by('-id').all()
+    list_number_users = list_user.count()
+    message = f'{list_number_users} utilisateurs'
+    if list_number_users == 1:
+        message = f'{list_number_users} utilisateur'    
+    context = {
+        'user': User.objects.all(),
+        'form': UserForm(),
+        'users': list_user,
+        'message': message,
+        'list_number_users':list_number_users
+    }
+    return render(request , 'apps/list_user.html', context)
+
+def remove_user(request , id_user):
+    user = User.objects.get(id=id_user)
+    user.delete()
+    return redirect('apps:user')
+
+def show_information_user(request , id_user):
+    user = User.objects.get(id=id_user)
+    context = {'user': user}
+    return render(request , "apps/show_user.html",context)
