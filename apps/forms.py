@@ -6,14 +6,14 @@ class PersonalForm(forms.ModelForm):
     class Meta:
         model = PersonalOffice
         fields = [
-            "fristname", 
+            "name", 
             "lastname",
             "sex",
             "phone",
             "email"
         ]
         widgets = { 
-            'fristname': forms.TextInput(attrs={
+            'name': forms.TextInput(attrs={
                 'class': 'form-control',
                 'placeholder': 'First Name',
                 'required': True, 
